@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             ApiKeyEncryptionTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = BuildConfig.API_KEY,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
