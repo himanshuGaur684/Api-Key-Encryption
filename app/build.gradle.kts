@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -20,6 +22,14 @@ android {
         }
     }
 
+    val localProperties = Properties()
+    val localPropertiesFile = File(rootDir,"secret.properties")
+    if(localPropertiesFile.exists() && localPropertiesFile.isFile){
+        localPropertiesFile.inputStream().use {
+            localProperties.load(it)
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -27,6 +37,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String","API_KEY_PROD",localProperties.getProperty("API_KEY"))
+
+        }
+        debug {
+            buildConfigField("String","API_KEY",localProperties.getProperty("API_KEY"))
         }
     }
     compileOptions {
@@ -38,6 +53,8 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+        resValues = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.9"
