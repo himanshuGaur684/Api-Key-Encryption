@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <domain-config>
+        <domain
+            clearTextTrafficPermitted="false"
+            includeSubdomains="false">
+        </domain>
+
+        <pin-set tools:ignore="MissingBackupPin">
+            <pin digest="SHA-256">eiBp+imBM9GS7/C6vnh7he9GeEPI+IbvtVx7GtzTaNM=</pin>
+        </pin-set>
+
+        <tls-configuration>
+            <minimum>
+                TLSv1.2
+            </minimum>
+        </tls-configuration>
+
+        <trust-anchors>
+            <certificates src="@xml/backup" />
+        </trust-anchors>
+
+    </domain-config>
+</network-security-config>
